@@ -1,0 +1,36 @@
+SELECT
+    datetime,
+    DATE(datetime) AS date,
+    EXTRACT(HOUR FROM datetime) AS hour,
+    CONCAT(EXTRACT(DOW FROM datetime), ' - ', TO_CHAR(datetime, 'FMDay')) AS day_number,
+    TO_CHAR(datetime, 'FMDay') AS day_name,
+    TO_CHAR(datetime, 'FMMonth') AS month_name,
+    TO_CHAR(datetime, 'Mon/YY') AS month_year,
+    CASE
+        WHEN season = 1 THEN 'Winter'    -- 1 = inverno
+        WHEN season = 2 THEN 'Spring'    -- 2 = primavera
+        WHEN season = 3 THEN 'Summer'    -- 3 = verão
+        ELSE 'Autumn'                    -- 4 = outono
+    END AS season_name,
+    CASE
+        WHEN holiday = 1 THEN 'Yes'         -- H = holiday
+        ELSE 'No'                         -- N = not holiday
+    END AS holiday_status,
+    CASE
+        WHEN workingday = 1 THEN 'Yes'     -- W = workingday
+        ELSE 'No'                         -- N = not workingday
+    END AS workingday_status,
+    CASE
+        WHEN weather = 1 THEN 'Sunny'    -- 1 = ensolarado
+        WHEN weather = 2 THEN 'Cloudy'   -- 2 = nublado
+        WHEN weather = 3 THEN 'Raining'  -- 3 = chovendo
+        ELSE 'Snowstorm'                 -- 4 = nevasca
+    END AS weather_status,
+    temp,
+    atemp,
+    humidity,
+    windspeed,
+    casual,
+    registered,
+    count
+FROM capital_share_bike;
